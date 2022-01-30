@@ -29,3 +29,9 @@ class UnfittedPipelineStageError(Exception):
     """An exception raised when a (non-fit) transform is attempted with an
     unfitted pipeline stage.
     """
+
+
+class UnfinalizedPipelineStageApplicationError(PipelineApplicationError):
+    """An exception raised when a pipeline stage is attempted to be applied toa
+    a dataframe before it has been finalized.
+    """

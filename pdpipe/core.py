@@ -767,6 +767,13 @@ class PdPipeline(PdPipelineStage, collections.abc.Sequence):
 
     def __init__(self, stages, transformer_getter=None, **kwargs):
         self._stages = stages
+        for stage in stages:
+            try:
+                if not stage.finalized:
+                    raise ValueError(
+                        'Pipeline stage {} is not finalized!'.format(stage))
+            except AttributeError:
+                pass
         self._trans_getter = transformer_getter
         self.is_fitted = False
         super_kwargs = {
